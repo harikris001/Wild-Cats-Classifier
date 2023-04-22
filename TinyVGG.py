@@ -29,7 +29,7 @@ class tinyVGG(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(in_features=hidden_units*7*7,
+            nn.Linear(in_features=hidden_units*16*16,
                       out_features=output_shape)
         )
     
