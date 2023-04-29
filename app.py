@@ -40,7 +40,7 @@ def effnet():
     nn.Dropout(0.4),
     nn.Linear(512, 10),
     )
-    model.load_state_dict(torch.load('Best_model/EfficientNet B0/EfficientNet_B0_catClassifier.pth'))
+    model.load_state_dict(torch.load('Best_model/EfficientNet B0/EfficientNet_B0_catClassifier.pth',map_location=torch.device('cpu')))
     return model
 
 
@@ -48,12 +48,12 @@ def inception():
     weights = Inception_V3_Weights.DEFAULT
     model = inception_v3(weights = weights)
     model.fc = nn.Linear(in_features = 2048, out_features = 10)
-    model.load_state_dict(torch.load('Best_model/Inception/Inception_catClassifier.pth'))
+    model.load_state_dict(torch.load('Best_model/Inception/Inception_catClassifier.pth',map_location=torch.device('cpu')))
     return model
 
 def tinyvgg1():
     model = tinyVGG(input_shape=3,hidden_units=10,output_shape=10)
-    model.load_state_dict(torch.load('Best_model/tinyvgg/TinyVGGmodel.pth'))
+    model.load_state_dict(torch.load('Best_model/tinyvgg/TinyVGGmodel.pth',map_location=torch.device('cpu')))
     return model
 
 def predict(model,img):
