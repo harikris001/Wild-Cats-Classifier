@@ -68,7 +68,7 @@ def predict(model,img):
 st.image('https://c1.wallpaperflare.com/preview/987/480/945/big-cats-collage-predators-animals.jpg',width=350)
 st.header('Wild Big Cat Classifier')
 st.write("Welcome to my project where you can explore the fascinating world of wild cats through the lens of cutting-edge deep learning technology. Trained  on different types of neural networks, including EfficientNet, Inception, and TinyVGG, on a comprehensive dataset of wild cats, enabling you to easily identify various feline species. Whether you're a wildlife enthusiast or simply a cat lover, you're sure to enjoy this exciting journey into the wild. So, join us and let's discover the beauty and diversity of wild cats together!")
-
+st.write('Model can identify cats like: AFRICAN LEOPARD,CARACAL,CHEETAH,CLOUDED LEOPARD,JAGUAR,LIONS,OCELOT,PUMA,SNOW LEOPARD,TIGER. Upload any images of these anials to identify them.')
 
 with st.sidebar:
     st.image('https://miro.medium.com/v2/resize:fit:1400/1*3fA77_mLNiJTSgZFhYnU0Q.png')
