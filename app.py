@@ -8,6 +8,18 @@ from TinyVGG import tinyVGG
 from matplotlib import pyplot as plt
 from PIL import Image
 
+import wikipedia
+
+
+def get_wiki(search):
+    # set language to English (default is auto-detect)
+    wikipedia.set_lang('en')
+    st.write('Fetching results form wikipedia')
+    # set language to English (default is auto-detect)
+    summary = wikipedia.summary(search)
+    # print the full page content
+    return summary
+
 
 class_names= ['AFRICAN LEOPARD','CARACAL','CHEETAH','CLOUDED LEOPARD','JAGUAR','LIONS','OCELOT','PUMA','SNOW LEOPARD','TIGER']
 
@@ -67,8 +79,25 @@ def predict(model,img):
     
 st.image('https://c1.wallpaperflare.com/preview/987/480/945/big-cats-collage-predators-animals.jpg',width=350)
 st.header('Wild Big Cat Classifier')
-st.write("Welcome to my project where you can explore the fascinating world of wild cats through the lens of cutting-edge deep learning technology. Trained  on different types of neural networks, including EfficientNet, Inception, and TinyVGG, on a comprehensive dataset of wild cats, enabling you to easily identify various feline species. Whether you're a wildlife enthusiast or simply a cat lover, you're sure to enjoy this exciting journey into the wild. So, join us and let's discover the beauty and diversity of wild cats together!")
-st.write('Model can identify cats like: AFRICAN LEOPARD,CARACAL,CHEETAH,CLOUDED LEOPARD,JAGUAR,LIONS,OCELOT,PUMA,SNOW LEOPARD,TIGER. Upload any images of these anials to identify them.')
+st.write("Welcome to my project where you can explore the fascinating world of wild cats through the lens of cutting-edge deep learning technology. Trained on different types of neural networks, including EfficientNet, Inception, and TinyVGG, on a comprehensive dataset of wild cats, enabling you to easily identify various feline species. Whether you're a wildlife enthusiast or simply a cat lover, you're sure to enjoy this exciting journey into the wild. So, join us and let's discover the beauty and diversity of wild cats together!")
+st.markdown('Model can identify cats like:')
+st.markdown(
+"""
+* AFRICAN LEOPARD
+* CARACAL
+* CHEETAH
+* CLOUDED LEOPARD
+* JAGUAR
+* LIONS
+* OCELOT
+* PUMA
+* SNOW LEOPARD
+* TIGER
+
+
+**Upload images of these animals(only) to identify them.**
+"""
+         )
 
 with st.sidebar:
     st.image('https://miro.medium.com/v2/resize:fit:1400/1*3fA77_mLNiJTSgZFhYnU0Q.png')
@@ -96,7 +125,11 @@ if selection == 'EfficientNet B0':
         st.image(transimg_modified,clamp=True,channels='RGB')
 
         st.markdown('#### Prediction')
-        st.subheader(body=class_names[predict(model=effnet(),img=transimg)])
+        if st.button('PREDICT'):
+            st.subheader(body=class_names[predict(model=effnet(),img=transimg)])
+            summary = get_wiki(class_names[predict(model=effnet(),img=transimg)])
+            st.markdown('##### Somtimes Wikipedia results maybe broken....sorry in advance 🙂')
+            st.write(summary)
 
 
 if selection == 'Inception':
@@ -116,7 +149,11 @@ if selection == 'Inception':
         st.image(transimg_modified,clamp=True,channels='RGB')
 
         st.markdown('#### Prediction')
-        st.subheader(body=class_names[predict(model=inception(),img=transimg)])
+        if st.button('PREDICT'):
+            st.subheader(body=class_names[predict(model=inception(),img=transimg)])
+            summary = get_wiki(class_names[predict(model=inception(),img=transimg)])
+            st.markdown('##### Somtimes Wikipedia results maybe broken....sorry in advance 🙂')
+            st.write(summary)
 
 
 if selection == 'TinyVGG':
@@ -136,4 +173,8 @@ if selection == 'TinyVGG':
         st.image(transimg_modified,clamp=True,channels='RGB')
 
         st.markdown('#### Prediction')
-        st.subheader(body=class_names[predict(model=tinyvgg1(),img=transimg)])
+        if st.button('PREDICT'):
+            st.subheader(body=class_names[predict(model=tinyvgg1(),img=transimg)])
+            summary = get_wiki(class_names[predict(model=tinyvgg1(),img=transimg)])
+            st.markdown('##### Somtimes Wikipedia results maybe broken....sorry in advance 🙂')
+            st.write(summary)
